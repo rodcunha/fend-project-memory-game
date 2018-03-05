@@ -1,6 +1,41 @@
 /*
  * Create a list that holds all of your cards
  */
+var cards = [
+  {
+  id: 0,
+  img: "../img/chase.jpg"
+},
+{
+  id: 1,
+  img: "../img/everest.jpg"
+},
+{
+  id: 2,
+  img: "../img/marshall.jpg"
+},
+{
+  id: 3,
+  img: "../img/rocky.jpg"
+},
+{
+  id: 4,
+  img: "../img/rubble.jpg"
+},
+{
+  id: 5,
+  img: "../img/ryder.jpg"
+},
+{
+  id: 6,
+  img: "../img/skye.jpg"
+},
+{
+  id: 7,
+  img: "../img/zuma.jpg"
+}
+];
+var card = document.getElementsByTagName('li');
 
 
 /*
@@ -24,6 +59,12 @@ function shuffle(array) {
 
     return array;
 }
+
+
+card.addEventListner('click', function openCard(e) {
+  e.preventDefault();
+  this.addClass('open');
+});
 
 
 /*
