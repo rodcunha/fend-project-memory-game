@@ -69,7 +69,7 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(180);
+    transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
 }
@@ -85,7 +85,9 @@ h1 {
 }
 
 .deck .card>img {
-
+    widows: 100%;
+    height: 100%;
+    border-radius: 8px;
 }
 
 /*

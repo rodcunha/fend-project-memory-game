@@ -35,7 +35,8 @@ var cards = [
   img: "../img/zuma.jpg"
 }
 ];
-var card = document.getElementsByTagName('li');
+var deck = document.querySelector('.deck');
+console.log(cards);
 
 
 /*
@@ -59,11 +60,15 @@ function shuffle(array) {
 
     return array;
 }
+shuffle(cards);
+console.log(cards);
 
 
-card.addEventListner('click', function openCard(e) {
+deck.addEventListener('click', function openCard(e) {
   e.preventDefault();
-  this.addClass('open');
+  e.target.className += " open";
+  setTimeout(100);
+  e.target.className += " show";
 });
 
 
