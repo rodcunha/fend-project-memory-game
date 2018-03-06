@@ -35,8 +35,43 @@ var cards = [
   img: "../img/zuma.jpg"
 }
 ];
-var deck = document.querySelector('.deck');
-console.log(cards);
+
+var duplicate = [
+  {
+  id: 8,
+  img: "../img/chase.jpg"
+},
+{
+  id: 9,
+  img: "../img/everest.jpg"
+},
+{
+  id: 10,
+  img: "../img/marshall.jpg"
+},
+{
+  id: 11,
+  img: "../img/rocky.jpg"
+},
+{
+  id: 12,
+  img: "../img/rubble.jpg"
+},
+{
+  id: 13,
+  img: "../img/ryder.jpg"
+},
+{
+  id: 14,
+  img: "../img/skye.jpg"
+},
+{
+  id: 15,
+  img: "../img/zuma.jpg"
+}
+];
+var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
+
 
 
 /*
@@ -63,7 +98,13 @@ function shuffle(array) {
 shuffle(cards);
 console.log(cards);
 
+// loop through all the cards and add them to the
 
+cards.forEach(card in cards) {
+  document.getElementsTagName('')
+}
+
+// Event listener to flip and show the cards
 deck.addEventListener('click', function openCard(e) {
   e.preventDefault();
   e.target.className += " open";
