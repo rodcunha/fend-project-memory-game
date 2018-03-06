@@ -68,6 +68,12 @@ h1 {
     transition: all 1s ease-in-out;
 }
 
+.deck .card img {
+  transition-delay: 0.8s;
+  transition: 1s;
+  visibility: hidden;
+}
+
 .deck .card.open {
     transform: rotateY(180deg);
     background: #02b3e4;
@@ -76,6 +82,10 @@ h1 {
 
 .deck .card.show {
     font-size: 33px;
+}
+
+.deck .card.show img {
+  visibility: visible;
 }
 
 .deck .card.match {

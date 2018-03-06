@@ -70,7 +70,9 @@ var duplicate = [
   img: "../img/zuma.jpg"
 }
 ];
+
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
+var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
 
 
 
@@ -96,19 +98,22 @@ function shuffle(array) {
     return array;
 }
 shuffle(cards);
+shuffle(duplicate);
 console.log(cards);
+console.log(duplicate);
 
+console.log(tiles[3].src)
 // loop through all the cards and add them to the
 
-cards.forEach(card in cards) {
-  document.getElementsTagName('')
-}
+// cards.forEach(card in cards) {
+//   document.getElementsTagName('')
+// }
 
 // Event listener to flip and show the cards
 deck.addEventListener('click', function openCard(e) {
   e.preventDefault();
   e.target.className += " open";
-  setTimeout(100);
+  setTimeout(500);
   e.target.className += " show";
 });
 
