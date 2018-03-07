@@ -4,73 +4,70 @@
 var cards = [
   {
   id: 0,
-  img: "../img/chase.jpg"
+  img: "img/chase.jpg"
 },
 {
   id: 1,
-  img: "../img/everest.jpg"
+  img: "img/everest.jpg"
 },
 {
   id: 2,
-  img: "../img/marshall.jpg"
+  img: "img/marshall.jpg"
 },
 {
   id: 3,
-  img: "../img/rocky.jpg"
+  img: "img/rocky.jpg"
 },
 {
   id: 4,
-  img: "../img/rubble.jpg"
+  img: "img/rubble.jpg"
 },
 {
   id: 5,
-  img: "../img/ryder.jpg"
+  img: "img/ryder.jpg"
 },
 {
   id: 6,
-  img: "../img/skye.jpg"
+  img: "img/skye.jpg"
 },
 {
   id: 7,
-  img: "../img/zuma.jpg"
-}
-];
-
-var duplicate = [
-  {
+  img: "img/zuma.jpg"
+},
+{
   id: 8,
-  img: "../img/chase.jpg"
+  img: "img/chase.jpg"
 },
 {
   id: 9,
-  img: "../img/everest.jpg"
+  img: "img/everest.jpg"
 },
 {
   id: 10,
-  img: "../img/marshall.jpg"
+  img: "img/marshall.jpg"
 },
 {
   id: 11,
-  img: "../img/rocky.jpg"
+  img: "img/rocky.jpg"
 },
 {
   id: 12,
-  img: "../img/rubble.jpg"
+  img: "img/rubble.jpg"
 },
 {
   id: 13,
-  img: "../img/ryder.jpg"
+  img: "img/ryder.jpg"
 },
 {
   id: 14,
-  img: "../img/skye.jpg"
+  img: "img/skye.jpg"
 },
 {
   id: 15,
-  img: "../img/zuma.jpg"
+  img: "img/zuma.jpg"
 }
 ];
-
+var moves = 0;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
 
@@ -98,13 +95,18 @@ function shuffle(array) {
     return array;
 }
 shuffle(cards);
-shuffle(duplicate);
-console.log(cards);
-console.log(duplicate);
 
-//tiles[3].children.setAttribute('src', 'img/marshall');
-console.log(tiles[3].children);
+console.log(cards);
+console.log(tiles);
+
+//  var third = tiles[3].children.item(0);
+//  third.setAttribute('src', 'img/marshall.jpg');
+// console.log(tiles[3].children.item(0));
 // loop through all the cards and add them to the
+for (i = 0 ; i < tiles.length; i++) {
+  tiles[i].children.item(0).setAttribute('src', cards[i].img);
+}
+
 
 // cards.forEach(card in cards) {
 //   document.getElementsTagName('')
@@ -116,6 +118,8 @@ deck.addEventListener('click', function openCard(e) {
   e.target.className += " open";
   setTimeout(500);
   e.target.className += " show";
+  console.log(tiles[cards.id].children.item(0).getAttribute('src'));
+  // if (e.target.getAttribute('src') === )
 });
 
 
