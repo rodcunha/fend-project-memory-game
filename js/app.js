@@ -102,7 +102,8 @@ shuffle(duplicate);
 console.log(cards);
 console.log(duplicate);
 
-console.log(tiles[3].src)
+//tiles[3].children.setAttribute('src', 'img/marshall');
+console.log(tiles[3].children);
 // loop through all the cards and add them to the
 
 // cards.forEach(card in cards) {
