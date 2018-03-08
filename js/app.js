@@ -116,8 +116,9 @@ for (i = 0 ; i < tiles.length; i++) {
 deck.addEventListener('click', function openCard(e) {
   e.preventDefault();
   e.target.className += " open";
-  setTimeout(500);
-  e.target.className += " show";
+  setTimeout(function(){
+    e.target.className += " show";
+  }, 500);
   console.log(tiles[cards.id].children.item(0).getAttribute('src'));
   // if (e.target.getAttribute('src') === )
 });
