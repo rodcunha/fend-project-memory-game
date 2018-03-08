@@ -1,72 +1,46 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards = [
-  {
-  id: 0,
-  img: "img/chase.jpg"
-},
-{
-  id: 1,
-  img: "img/everest.jpg"
-},
-{
-  id: 2,
-  img: "img/marshall.jpg"
-},
-{
-  id: 3,
-  img: "img/rocky.jpg"
-},
-{
-  id: 4,
-  img: "img/rubble.jpg"
-},
-{
-  id: 5,
-  img: "img/ryder.jpg"
-},
-{
-  id: 6,
-  img: "img/skye.jpg"
-},
-{
-  id: 7,
-  img: "img/zuma.jpg"
-},
-{
-  id: 8,
-  img: "img/chase.jpg"
-},
-{
-  id: 9,
-  img: "img/everest.jpg"
-},
-{
-  id: 10,
-  img: "img/marshall.jpg"
-},
-{
-  id: 11,
-  img: "img/rocky.jpg"
-},
-{
-  id: 12,
-  img: "img/rubble.jpg"
-},
-{
-  id: 13,
-  img: "img/ryder.jpg"
-},
-{
-  id: 14,
-  img: "img/skye.jpg"
-},
-{
-  id: 15,
-  img: "img/zuma.jpg"
-}
-];
+ var cardsOrig = [
+   {card: 1,
+    img: "img/chase.jpg"
+   },
+   {card: 2,
+    img: "img/everest.jpg"
+   },
+   {
+    card: 3,
+    img: "img/marshall.jpg"
+   },
+   {
+     card: 4,
+     img: "img/rocky.jpg"
+   },
+   {
+     card: 5,
+     img: "img/rubble.jpg"
+   },
+   {
+     card: 6,
+     img: "img/ryder.jpg"
+   },
+   {
+     card: 7,
+     img: "img/skye.jpg"
+   },
+   {
+     card: 8,
+     img: "img/zuma.jpg"
+   }];
+
+shuffle(cardsOrig);
+let cardsTop = cardsOrig.slice(0);
+shuffle(cardsOrig);
+let cardsBottom = cardsOrig.slice(0);
+let cards = cardsTop.concat(cardsBottom);
+shuffle(cards);
+console.log(cards);
+
 var moves = 0;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
@@ -94,16 +68,14 @@ function shuffle(array) {
 
     return array;
 }
-shuffle(cards);
 
-console.log(cards);
 console.log(tiles);
 
 //  var third = tiles[3].children.item(0);
 //  third.setAttribute('src', 'img/marshall.jpg');
 // console.log(tiles[3].children.item(0));
 // loop through all the cards and add them to the
-for (i = 0 ; i < tiles.length; i++) {
+for (i = 0 ; i < cards.length; i++) {
   tiles[i].children.item(0).setAttribute('src', cards[i].img);
 }
 
@@ -119,8 +91,8 @@ deck.addEventListener('click', function openCard(e) {
   setTimeout(function(){
     e.target.className += " show";
   }, 500);
-  console.log(tiles[cards.id].children.item(0).getAttribute('src'));
   // if (e.target.getAttribute('src') === )
+  if ()
 });
 
 
