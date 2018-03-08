@@ -90,9 +90,9 @@ deck.addEventListener('click', function openCard(e) {
   e.target.className += " open";
   setTimeout(function(){
     e.target.className += " show";
+  //  e.setAttribute('data-cards', cards[])
   }, 500);
   // if (e.target.getAttribute('src') === )
-  if ()
 });
 
 
