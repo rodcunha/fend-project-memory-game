@@ -33,14 +33,6 @@
      img: "img/zuma.jpg"
    }];
 
-shuffle(cardsOrig);
-let cardsTop = cardsOrig.slice(0);
-shuffle(cardsOrig);
-let cardsBottom = cardsOrig.slice(0);
-let cards = cardsTop.concat(cardsBottom);
-shuffle(cards);
-console.log(cards);
-
 var moves = 0;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
@@ -65,11 +57,16 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
-console.log(tiles);
+shuffle(cardsOrig);
+let cardsTop = cardsOrig.slice(0);
+shuffle(cardsOrig);
+let cardsBottom = cardsOrig.slice(0);
+let cards = cardsTop.concat(cardsBottom);
+shuffle(cards);
+console.log(cards);
 
 //  var third = tiles[3].children.item(0);
 //  third.setAttribute('src', 'img/marshall.jpg');
@@ -77,15 +74,16 @@ console.log(tiles);
 // loop through all the cards and add them to the
 for (i = 0 ; i < cards.length; i++) {
   tiles[i].children.item(0).setAttribute('src', cards[i].img);
+  tiles[i].children.item(0).setAttribute('data-card', cards[i].card);
 }
 
 
 // cards.forEach(card in cards) {
 //   document.getElementsTagName('')
 // }
-
+let clickCounter = 0;
 // Event listener to flip and show the cards
-deck.addEventListener('click', function openCard(e) {
+deck.addEventListener('click',  function openCard(e) {
   e.preventDefault();
   e.target.className += " open";
   setTimeout(function(){
@@ -93,6 +91,8 @@ deck.addEventListener('click', function openCard(e) {
   //  e.setAttribute('data-cards', cards[])
   }, 500);
   // if (e.target.getAttribute('src') === )
+  console.log(e.target.children.item(0).getAttribute('data-card'));
+  
 });
 
 
