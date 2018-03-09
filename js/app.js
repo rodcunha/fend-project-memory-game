@@ -33,10 +33,15 @@
      img: "img/zuma.jpg"
    }];
 
-var moves = 0;
+var moveCounter = 0;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
+let movesElem = document.querySelector('.moves'); // selects the moves class span in the HTML
 
+//function to count the moves.
+var moves = deck.addEventListener('click', function() {
+  movesElem.innerHTML = moves;
+});
 
 
 /*
@@ -74,14 +79,15 @@ console.log(cards);
 // loop through all the cards and add them to the
 for (i = 0 ; i < cards.length; i++) {
   tiles[i].children.item(0).setAttribute('src', cards[i].img);
-  tiles[i].children.item(0).setAttribute('data-card', cards[i].card);
+  tiles[i].setAttribute('data-card', cards[i].card);
 }
-
 
 // cards.forEach(card in cards) {
 //   document.getElementsTagName('')
 // }
-let clickCounter = 0;
+let clickCounter = 1;
+let cardOne, cardTwo;
+
 // Event listener to flip and show the cards
 deck.addEventListener('click',  function openCard(e) {
   e.preventDefault();
@@ -90,11 +96,57 @@ deck.addEventListener('click',  function openCard(e) {
     e.target.className += " show";
   //  e.setAttribute('data-cards', cards[])
   }, 500);
+  console.log(clickCounter);
+  //function to distinguish between the first click and the second
+  function assignValues() {
+    if (clickCounter === 1 && !e.target.getAttribute('.show')) {
+      cardOne = e.target;
+      console.log(cardOne);
+      cardOne.getAttribute('data-card');
+      clickCounter++
+    } else if (clickCounter === 2 && !e.target.getAttribute('.show')) {
+      cardTwo = e.target;
+      console.log(cardTwo);
+      cardTwo.getAttribute('data-card');
+      clickCounter = 1;
+    }
+  };
+  assignValues();
+
+    let cardOneVal = cardOne.getAttribute('data-card'); //assign the value of data-card attribute of the first click to a variable
+    let cardTwoVal = cardTwo.getAttribute('data-card'); //assign the value of the data-card attribute for the 2nd click to a variable
+    console.log(cardOneVal + " " + cardTwoVal);
+    // function to match the data-card values
+    function matchCards() {
+      if (cardOneVal === cardTwoVal) {
+        console.log('they match');
+        cardOne.className += ' match';
+        cardTwo.className += ' match';
+        cardOne, cardTwo = null;
+      } else if (cardOneVal != cardTwoVal && cardTwoVal != undefined) {
+        console.log("they don't match");
+        cardOneVal = null;
+        cardTwoVal = null;
+        console.log(cardOneVal + " " + cardTwoVal);
+          if (cardOneVal == null && cardTwoVal == null) {
+          setTimeout(function() {
+            console.log("card one: " + cardOne + "   cardTwo: " + cardTwo);
+            cardOne.classList.remove('open', 'show');
+            cardTwo.classList.remove('open', 'show');
+          }, 600);
+        }
+      }
+    }
+    if ( clickCounter == 1 ) { matchCards();}
+
   // if (e.target.getAttribute('src') === )
-  console.log(e.target.children.item(0).getAttribute('data-card'));
-  
+//  console.log(e.target.getAttribute('data-card'));
 });
 
+if (clickCounter % 2 === 0 ) {
+  console.log(moves);
+  moves++;
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
