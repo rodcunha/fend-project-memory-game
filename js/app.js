@@ -102,12 +102,14 @@ function startGame() {
     e.target.className += " open";
     setTimeout(function(){
       e.target.className += " show";
-    //  e.setAttribute('data-cards', cards[])
     }, 500);
     console.log(clickCounter);
+
     //function to distinguish between the first click and the second
     function assignValues() {
+
       let list = document.querySelector('.deck');
+
       if (clickCounter === 1 && !e.target.getAttribute('.show') && e.target != list ) {
         cardOne = e.target;
         console.log(cardOne);
@@ -118,10 +120,10 @@ function startGame() {
         console.log(cardTwo);
         cardTwo.getAttribute('data-card');
         clickCounter = 1;
-        moveCounter++;
         starCount();
+        moveCounter++
       }
-    };
+    }; // is counting everytime we click an open card, need to fix
     assignValues();
 
     // // check if the card is open
@@ -172,8 +174,13 @@ startGame();
 //function to restart the game
 const restart = document.querySelector('.fa-repeat');
 function restartGame() {
-  console.log('restart clicked')
+  console.log('restart clicked');
+  moveCounter = 1;
+  const stars = document.querySelectorAll('.fa');
   const cards = document.querySelectorAll('.card');
+  stars.forEach(function(e) {
+    e.classList += ' fa-star';
+  });
   cards.forEach(function(e) {
       e.classList.remove('show', 'open', 'match');
   });
@@ -182,9 +189,8 @@ function restartGame() {
   }, 1000);
 }
 restart.addEventListener('click', function() {
-  moveCounter = 1;
   restartGame();
-});
+}); //number of moves go increases x2 when the restart function is clicked.
 
 /*
  * set up the event listener for a card. If a card is clicked:
