@@ -39,6 +39,7 @@ var tiles = document.querySelectorAll('.card'); // selects all the list items an
 let movesElem = document.querySelector('.moves'); // selects the moves class span in the HTML
 let cards, cardsTop, cardsBottom;
 
+
 //shuffling of the cards
 function shuffleCards() {
   shuffle(cardsOrig);
@@ -55,13 +56,16 @@ var moves = deck.addEventListener('click', function() {
   movesElem.innerHTML = moveCounter;
 });
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+// function to remove the stars from the score
+function starCount() {
+  if (moveCounter === 10) { // when the move counter reaches 10 remove the star
+    document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
+    console.log('drop one star');
+  } else if (moveCounter === 20) {
+    document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
+    console.log('drop second star');
+  }
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -89,12 +93,8 @@ function startGame() {
     tiles[i].setAttribute('data-card', cards[i].card);
   }
 
-  // cards.forEach(card in cards) {
-  //   document.getElementsTagName('')
-  // }
   let clickCounter = 1;
   let cardOne, cardTwo;
-
 
   // Event listener to flip and show the cards
   deck.addEventListener('click',  function openCard(e) {
@@ -107,20 +107,30 @@ function startGame() {
     console.log(clickCounter);
     //function to distinguish between the first click and the second
     function assignValues() {
-      if (clickCounter === 1 && !e.target.getAttribute('.show')) {
+      let list = document.querySelector('.deck');
+      if (clickCounter === 1 && !e.target.getAttribute('.show') && e.target != list ) {
         cardOne = e.target;
         console.log(cardOne);
         cardOne.getAttribute('data-card');
         clickCounter++
-      } else if (clickCounter === 2 && !e.target.getAttribute('.show')) {
+      } else if (clickCounter === 2 && !e.target.getAttribute('.show') && e.target != list) {
         cardTwo = e.target;
         console.log(cardTwo);
         cardTwo.getAttribute('data-card');
         clickCounter = 1;
         moveCounter++;
+        starCount();
       }
     };
     assignValues();
+
+    // // check if the card is open
+    // if (cardOne.getAttribute('data-open') === "yes") {
+    //   console.log('clicked an open card, counter stays the same');
+    // } else {
+    // clickCounter++;
+    // cardOne.removeAttribute('data-open')
+    // }
 
     let cardOneVal = cardOne.getAttribute('data-card'); //assign the value of data-card attribute of the first click to a variable
     let cardTwoVal = cardTwo.getAttribute('data-card'); //assign the value of the data-card attribute for the 2nd click to a variable
@@ -133,33 +143,31 @@ function startGame() {
         cardTwo.className += ' match';
         cardOne, cardTwo = undefined;
       } else if (cardOneVal != cardTwoVal && cardTwoVal != undefined) {
-        console.log("they don't match");
-        cardOneVal = null;
-        cardTwoVal = null;
-        console.log(cardOneVal + " " + cardTwoVal);
-          if (cardOneVal == null && cardTwoVal == null) {
-          setTimeout(function() {
-            console.log("card one: " + cardOne + "   cardTwo: " + cardTwo);
-            cardOne.classList.remove('open', 'show');
-            cardTwo.classList.remove('open', 'show');
-          }, 600);
-        }
+          console.log("they don't match");
+          cardOneVal = undefined;
+          cardTwoVal = undefined;
+
+          setTimeout(function() { //add a slight timer for the cards to be shown before they are flipped back when they don't match
+            if (cardOneVal == undefined && cardTwoVal == undefined) {
+              setTimeout(function() {
+                cardTwo.classList.remove('show');
+                cardOne.classList.remove('show');
+              }, 250);
+
+              setTimeout(function() {
+              //  console.log("card one: " + cardOne + "   cardTwo: " + cardTwo);
+                cardOne.classList.remove('open');
+                cardTwo.classList.remove('open');
+              }, 600);
+          }
+        }, 600);
       }
     }
-    if ( clickCounter == 1 ) { matchCards();}
-
-  // if (e.target.getAttribute('src') === )
-//  console.log(e.target.getAttribute('data-card'));
+    if ( clickCounter == 1 ) { matchCards(); }
+    console.log(document.querySelector('.fa-star:last-of-type'));
 });
 }
 startGame();
-
-function starCount() {
-  if (moveCounter >= 10) {
-    document.querySelectorAll('.fa-star:last-of-type').classList.remove('fa-star').classList.add('fa-star-o');
-  }
-}
-starCount();
 
 //function to restart the game
 const restart = document.querySelector('.fa-repeat');
