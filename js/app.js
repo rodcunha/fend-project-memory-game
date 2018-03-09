@@ -33,14 +33,14 @@
      img: "img/zuma.jpg"
    }];
 
-var moveCounter = 0;
+var moveCounter = 1;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
 let movesElem = document.querySelector('.moves'); // selects the moves class span in the HTML
 
 //function to count the moves.
 var moves = deck.addEventListener('click', function() {
-  movesElem.innerHTML = moves;
+  movesElem.innerHTML = moveCounter;
 });
 
 
@@ -109,6 +109,7 @@ deck.addEventListener('click',  function openCard(e) {
       console.log(cardTwo);
       cardTwo.getAttribute('data-card');
       clickCounter = 1;
+      moveCounter++;
     }
   };
   assignValues();
@@ -118,11 +119,11 @@ deck.addEventListener('click',  function openCard(e) {
     console.log(cardOneVal + " " + cardTwoVal);
     // function to match the data-card values
     function matchCards() {
-      if (cardOneVal === cardTwoVal) {
+      if (cardOneVal === cardTwoVal) { // if the values of the data-card attribute are the same add class match.
         console.log('they match');
         cardOne.className += ' match';
         cardTwo.className += ' match';
-        cardOne, cardTwo = null;
+        cardOne, cardTwo = undefined;
       } else if (cardOneVal != cardTwoVal && cardTwoVal != undefined) {
         console.log("they don't match");
         cardOneVal = null;
