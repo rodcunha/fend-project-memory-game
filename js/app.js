@@ -37,6 +37,19 @@ var moveCounter = 1;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
 let movesElem = document.querySelector('.moves'); // selects the moves class span in the HTML
+let cards, cardsTop, cardsBottom;
+
+//shuffling of the cards
+function shuffleCards() {
+  shuffle(cardsOrig);
+  cardsTop = cardsOrig.slice(0);
+  shuffle(cardsOrig);
+  cardsBottom = cardsOrig.slice(0);
+  cards = cardsTop.concat(cardsBottom);
+  shuffle(cards);
+  console.log(cards);
+};
+shuffleCards();
 
 //function to count the moves.
 var moves = deck.addEventListener('click', function() {
@@ -65,54 +78,49 @@ function shuffle(array) {
     return array;
 }
 
-shuffle(cardsOrig);
-let cardsTop = cardsOrig.slice(0);
-shuffle(cardsOrig);
-let cardsBottom = cardsOrig.slice(0);
-let cards = cardsTop.concat(cardsBottom);
-shuffle(cards);
-console.log(cards);
 
-//  var third = tiles[3].children.item(0);
-//  third.setAttribute('src', 'img/marshall.jpg');
-// console.log(tiles[3].children.item(0));
-// loop through all the cards and add them to the
-for (i = 0 ; i < cards.length; i++) {
-  tiles[i].children.item(0).setAttribute('src', cards[i].img);
-  tiles[i].setAttribute('data-card', cards[i].card);
-}
+function startGame() {
+  //  var third = tiles[3].children.item(0);
+  //  third.setAttribute('src', 'img/marshall.jpg');
+  // console.log(tiles[3].children.item(0));
+  // loop through all the cards and add them to the
+  for (i = 0 ; i < cards.length; i++) {
+    tiles[i].children.item(0).setAttribute('src', cards[i].img);
+    tiles[i].setAttribute('data-card', cards[i].card);
+  }
 
-// cards.forEach(card in cards) {
-//   document.getElementsTagName('')
-// }
-let clickCounter = 1;
-let cardOne, cardTwo;
+  // cards.forEach(card in cards) {
+  //   document.getElementsTagName('')
+  // }
+  let clickCounter = 1;
+  let cardOne, cardTwo;
 
-// Event listener to flip and show the cards
-deck.addEventListener('click',  function openCard(e) {
-  e.preventDefault();
-  e.target.className += " open";
-  setTimeout(function(){
-    e.target.className += " show";
-  //  e.setAttribute('data-cards', cards[])
-  }, 500);
-  console.log(clickCounter);
-  //function to distinguish between the first click and the second
-  function assignValues() {
-    if (clickCounter === 1 && !e.target.getAttribute('.show')) {
-      cardOne = e.target;
-      console.log(cardOne);
-      cardOne.getAttribute('data-card');
-      clickCounter++
-    } else if (clickCounter === 2 && !e.target.getAttribute('.show')) {
-      cardTwo = e.target;
-      console.log(cardTwo);
-      cardTwo.getAttribute('data-card');
-      clickCounter = 1;
-      moveCounter++;
-    }
-  };
-  assignValues();
+
+  // Event listener to flip and show the cards
+  deck.addEventListener('click',  function openCard(e) {
+    e.preventDefault();
+    e.target.className += " open";
+    setTimeout(function(){
+      e.target.className += " show";
+    //  e.setAttribute('data-cards', cards[])
+    }, 500);
+    console.log(clickCounter);
+    //function to distinguish between the first click and the second
+    function assignValues() {
+      if (clickCounter === 1 && !e.target.getAttribute('.show')) {
+        cardOne = e.target;
+        console.log(cardOne);
+        cardOne.getAttribute('data-card');
+        clickCounter++
+      } else if (clickCounter === 2 && !e.target.getAttribute('.show')) {
+        cardTwo = e.target;
+        console.log(cardTwo);
+        cardTwo.getAttribute('data-card');
+        clickCounter = 1;
+        moveCounter++;
+      }
+    };
+    assignValues();
 
     let cardOneVal = cardOne.getAttribute('data-card'); //assign the value of data-card attribute of the first click to a variable
     let cardTwoVal = cardTwo.getAttribute('data-card'); //assign the value of the data-card attribute for the 2nd click to a variable
@@ -143,11 +151,35 @@ deck.addEventListener('click',  function openCard(e) {
   // if (e.target.getAttribute('src') === )
 //  console.log(e.target.getAttribute('data-card'));
 });
-
-if (clickCounter % 2 === 0 ) {
-  console.log(moves);
-  moves++;
 }
+startGame();
+
+function starCount() {
+  if (moveCounter >= 10) {
+    document.querySelectorAll('.fa-star:last-of-type').classList.remove('fa-star').classList.add('fa-star-o');
+  }
+}
+starCount();
+
+//function to restart the game
+const restart = document.querySelector('.fa-repeat');
+function restartGame() {
+  console.log('restart clicked')
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach(function(e) {
+      e.classList.remove('show', 'open', 'match');
+  });
+  moveCounter = 0;
+}
+restart.addEventListener('click', function() {
+  restartGame();
+  movesElem.innerHTML = moveCounter;
+  startGame();
+  setTimeout(function() {
+    shuffleCards();
+  }, 500);
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
