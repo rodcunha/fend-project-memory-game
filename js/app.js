@@ -49,7 +49,6 @@ function shuffleCards() {
   shuffle(cards);
   console.log(cards);
 };
-shuffleCards();
 
 //function to count the moves.
 var moves = deck.addEventListener('click', function() {
@@ -80,6 +79,7 @@ function shuffle(array) {
 
 
 function startGame() {
+  shuffleCards();
   //  var third = tiles[3].children.item(0);
   //  third.setAttribute('src', 'img/marshall.jpg');
   // console.log(tiles[3].children.item(0));
@@ -166,19 +166,16 @@ const restart = document.querySelector('.fa-repeat');
 function restartGame() {
   console.log('restart clicked')
   const cards = document.querySelectorAll('.card');
-
   cards.forEach(function(e) {
       e.classList.remove('show', 'open', 'match');
   });
-  moveCounter = 0;
+  setTimeout(function() {
+    startGame();
+  }, 1000);
 }
 restart.addEventListener('click', function() {
+  moveCounter = 1;
   restartGame();
-  movesElem.innerHTML = moveCounter;
-  startGame();
-  setTimeout(function() {
-    shuffleCards();
-  }, 500);
 });
 
 /*
