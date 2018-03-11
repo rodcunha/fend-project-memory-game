@@ -65,9 +65,7 @@ const cardsPawPatrol = [
 
   //shuffling of the cards
   function shuffleCards() {
-    shuffle(cardsPawPatrol);
     cardsTop = cardsPawPatrol.slice(0);
-    shuffle(cardsPawPatrol);
     cardsBottom = cardsPawPatrol.slice(0);
     cards = cardsTop.concat(cardsBottom);
     shuffle(cards);
@@ -83,7 +81,8 @@ const cardsPawPatrol = [
 
   // reveal the cards and push them to the array to check
   function showCard() {
-    deck.addEventListener('click',  function(e) {
+    deck.addEventListener('click',  function(e) {  //when the deck element is clicked
+      e.stopImmediatePropagation();
       e.preventDefault();
       e.target.className += " open";
       setTimeout(function(){
@@ -142,6 +141,7 @@ const cardsPawPatrol = [
         }
       } // end of match cards
       matchCards();
+      showModal();
     });
   }
 
@@ -150,8 +150,6 @@ const cardsPawPatrol = [
     assignImg();
     showCard();
   }
-
-  startGame();
 
   function restartGame() {
     console.log('restart clicked');
@@ -168,7 +166,14 @@ const cardsPawPatrol = [
     restartGame();
   });
 
+  // when all is loaded run startGame
+  document.addEventListener('DOMContentLoaded', startGame());
 
+function showModal() {
+  if (checkCards.length === cards.length) {
+    modal.style.display = "block";
+  }
+}
 
   // Modal Code from w3schools
   const modal = document.getElementById('myModal');
