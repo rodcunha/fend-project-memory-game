@@ -36,9 +36,8 @@
 var moveCounter = 1;
 var deck = document.querySelector('.deck');  // the unordered list that contains all the cards
 var tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
-let movesElem = document.querySelector('.moves'); // selects the moves class span in the HTML
+let movesElem = document.querySelectorAll('.moves'); // selects the moves class span in the HTML
 let cards, cardsTop, cardsBottom;
-
 
 //shuffling of the cards
 function shuffleCards() {
@@ -53,15 +52,17 @@ function shuffleCards() {
 
 //function to count the moves.
 var moves = deck.addEventListener('click', function() {
-  movesElem.innerHTML = moveCounter;
+  movesElem.forEach(function(e) {
+    e.innerHTML = moveCounter;
+  });
 });
 
 // function to remove the stars from the score
 function starCount() {
-  if (moveCounter === 10) { // when the move counter reaches 10 remove the star
+  if (moveCounter === 15) { // when the move counter reaches 10 remove the star
     document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
     console.log('drop one star');
-  } else if (moveCounter === 20) {
+  } else if (moveCounter === 30) {
     document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
     console.log('drop second star');
   }
@@ -191,6 +192,30 @@ function restartGame() {
 restart.addEventListener('click', function() {
   restartGame();
 }); //number of moves go increases x2 when the restart function is clicked.
+
+
+// Modal Code from w3schools
+const modal = document.getElementById('myModal');
+const btn = document.getElementById("myBtn");
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
