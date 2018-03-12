@@ -32,11 +32,11 @@ Together with the number of moves your performance is graded with stars. You sta
 
 This was based on the started project files given by Udacity and built using the following:
 
-..* HTML, CSS & JavaScript;
-..* Star graphics by [Font Awesome](https://fontawesome.com/);
-..* Paw Patrol Graphics from [Paw Patrol Wikia] (http://paw-patrol.wikia.com);
-..* Trophy image from: [Lao Blogger](http://laoblogger.com);
-..* Typeface Montserrat by [Google Fonts](https://fonts.google.com);
+  * HTML, CSS & JavaScript;
+  * Star graphics by [Font Awesome](https://fontawesome.com/);
+  * Paw Patrol Graphics from [Paw Patrol Wikia] (http://paw-patrol.wikia.com);
+  * Trophy image from: [Lao Blogger](http://laoblogger.com);
+  * Typeface Montserrat by [Google Fonts](https://fonts.google.com);
 
 ## TO DO
 
