@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [The Game](#The Game)
+* [What I have used to build the game](#What I have used to build this)
+* [To Do](#TO DO)
 * [Contributing](#contributing)
-
-## Table of Contents
 
 
 ## The Game
@@ -15,8 +15,6 @@
 You can download or clone the repo and run the `index.html` file on your local system.
 
 Alternatively you can [Play Here](https://rodcunha.github.io/memory-game/)
-
-### The game
 
 You are given 8 pairs of cards (currently themed Paw Patrol).
 
@@ -28,7 +26,7 @@ Every time you reveal 2 cards, 1 move is counted. Your current number of moves i
 
 Together with the number of moves your performance is graded with stars. You start with 3 stars, if you resolve the game in under 15 moves, you will be awarded 3 stars, if you resolve the game between 15 and 30 moves you will be awarded 2 stars and if you take more than 30 moves to resolve the game you will be awarded 1 star.
 
-## What I've used to build this
+## What have used to build this
 
 This was based on the started project files given by Udacity and built using the following:
 
