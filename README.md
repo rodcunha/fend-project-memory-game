@@ -40,9 +40,9 @@ This was based on the started project files given by Udacity and built using the
 
 ## TO DO
 
-..* I would like to add different themed decks. (Ie. Avengers, Star Wars, Gumball, Pokemon, etc)
-..* I would like to add a difficulty level choice (Easy, Medium & Hard). See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
-..* I would like to Introduce a leaderboard that can be recorded, to add a competitive element.
+ * I would like to add different themed decks. (Ie. Avengers, Star Wars, Gumball, Pokemon, etc)
+ * I would like to add a difficulty level choice (Easy, Medium & Hard). See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+ * I would like to Introduce a leaderboard that can be recorded, to add a competitive element.
 
 ## Contributing
 
