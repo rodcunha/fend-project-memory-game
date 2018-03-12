@@ -51,15 +51,22 @@ const cardsPawPatrol = [
 
   // function to remove the stars from the score
   function starCount() {
-    console.log('moveCounter = ' + moveCounter);
+    //console.log('moveCounter = ' + moveCounter);
     if (moveCounter === 15) { // when the move counter reaches 15 remove the star
       document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
-      console.log('drop one star');
     } else if (moveCounter === 30) { // when the move counter reaches 15 remove the star
       document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
-      console.log('drop second star');
     }
+    // user always gets one star!
   }
+
+  function score() {
+    let scoreElem = document.querySelector('#score'); // selects the element with the id of score
+    const starList = document.querySelector('.stars');
+    scoreElem.innerHTML = starList.innerHTML;
+    console.log(starList.innerHTML)
+  }
+  score();
 
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
@@ -99,7 +106,7 @@ const cardsPawPatrol = [
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
-      }, 500);
+      }, 300);
 
       const cardId = e.target.getAttribute('data-card');
 
@@ -144,14 +151,16 @@ const cardsPawPatrol = [
           console.log(matchOne + "-" + matchTwo + 'They are not a match');
           checkCards.splice(-2, 2);
           setTimeout(function() {
+            cardOne.classList.remove('show'); // hides the image from the first matched card after 0.2s
+          }, 200);
+          setTimeout(function() {
             //console.log('cardOne: ' + cardOne + '=' + 'cardTwo' + cardTwo);
-            cardOne.classList.remove('show');
             cardTwo.classList.remove('show');
           setTimeout(function() {
-            cardOne.classList.remove('open');
             cardTwo.classList.remove('open');
-          }, 500);
-        }, 700);
+          }, 400);
+          cardOne.classList.remove('open');
+        }, 600);
         moveCounter++;
         }
       } // end of match cards
@@ -178,10 +187,12 @@ const cardsPawPatrol = [
       e.classList += ' fa-star';
     });
     clearCards.forEach(function(e) {
-      e.classList.remove('open', 'show', 'match');
+        e.classList.remove('open', 'show', 'match');
     });
     checkCards = [];
-    startGame();
+    setTimeout(function() {
+      startGame();
+    }, 1000);
   }
 
   restart.addEventListener('click', function() {
@@ -203,6 +214,7 @@ const cardsPawPatrol = [
   // when all the cards are matched show the congratulations modal
   function showModal() {
     if (checkCards.length === cards.length) {
+      score();
       modal.style.display = "block";
     }
   }
