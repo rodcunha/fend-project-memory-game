@@ -5,16 +5,47 @@
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
-## Instructions
+## Table of Contents
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## The Game
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+### How To Play?
+
+You can download or clone the repo and run the `index.html` file on your local system.
+
+Alternatively you can [Play Here](https://rodcunha.github.io/memory-game/)
+
+### The game
+
+You are given 8 pairs of cards (currently themed Paw Patrol).
+
+You will need to pair the cards that are equal by revealing two cards at the time. If the cards match, they will stay turned and you can proceed to the next cards. If the cards don't match they will be folded back again and you will have to try to remember the pictures behind them to match them with subsequent cards, hence the name memory game.
+
+### Score
+
+Every time you reveal 2 cards, 1 move is counted. Your current number of moves is displayed above the game board at all times.
+
+Together with the number of moves your performance is graded with stars. You start with 3 stars, if you resolve the game in under 15 moves, you will be awarded 3 stars, if you resolve the game between 15 and 30 moves you will be awarded 2 stars and if you take more than 30 moves to resolve the game you will be awarded 1 star.
+
+## What I've used to build this
+
+This was based on the started project files given by Udacity and built using the following:
+
+..* HTML, CSS & JavaScript;
+..* Star graphics by [Font Awesome](https://fontawesome.com/);
+..* Paw Patrol Graphics from [Paw Patrol Wikia] (http://paw-patrol.wikia.com);
+..* Trophy image from: [Lao Blogger](http://laoblogger.com);
+..* Typeface Montserrat by [Google Fonts](https://fonts.google.com);
+
+## TO DO
+
+..* I would like to add different themed decks. (Ie. Avengers, Star Wars, Gumball, Pokemon, etc)
+..* I would like to add a difficulty level choice (Easy, Medium & Hard). See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+..* I would like to Introduce a leaderboard that can be recorded, to add a competitive element.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+Although this repo is part of a Udacity program I am accepting contributions for added features described on the TO DO section.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
