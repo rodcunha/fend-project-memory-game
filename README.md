@@ -2,13 +2,13 @@
 
 ## Table of Contents
 
-* [The Game](#The Game)
-* [What I have used to build the game](#What I have used to build this)
-* [To Do](#TO DO)
+* [The Game](#thegame)
+* [What I have used to build the game](#tools)
+* [To Do](#todo)
 * [Contributing](#contributing)
 
 
-## The Game
+## <a name="thegame"></a>The Game
 
 ### How To Play?
 
@@ -26,7 +26,7 @@ Every time you reveal 2 cards, 1 move is counted. Your current number of moves i
 
 Together with the number of moves your performance is graded with stars. You start with 3 stars, if you resolve the game in under 15 moves, you will be awarded 3 stars, if you resolve the game between 15 and 30 moves you will be awarded 2 stars and if you take more than 30 moves to resolve the game you will be awarded 1 star.
 
-## What have used to build this
+## <a name="tools"></a>What have used to build this
 
 This was based on the started project files given by Udacity and built using the following:
 
@@ -36,7 +36,7 @@ This was based on the started project files given by Udacity and built using the
   * Trophy image from: [Lao Blogger](http://laoblogger.com);
   * Typeface Montserrat by [Google Fonts](https://fonts.google.com);
 
-## TO DO
+## <a name="todo"></a>TO DO
 
  * I would like to add different themed decks. (Ie. Avengers, Star Wars, Gumball, Pokemon, etc)
  * I would like to add a difficulty level choice (Easy, Medium & Hard). See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
