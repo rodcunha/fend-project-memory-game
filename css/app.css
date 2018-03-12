@@ -34,8 +34,10 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    color: #FF4A45;
+    font-weight: 600;
 }
 
 /*
@@ -43,9 +45,9 @@ h1 {
  */
 
 .deck {
-    width: 660px;
+    width: 680px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, #4399FF 0%, #FF4A45 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -70,6 +72,11 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     transform-style: preserve-3d;
     transition: all 0.6s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 3px 3px 10px #000;
+  transition: 0.3s;
 }
 
 .deck .card img {
@@ -110,12 +117,15 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    width: 580px;
+    margin-bottom: 20px;
+    display: grid;
+    color: #FFF;
+    grid-template-columns: 3fr 3fr 3fr 2fr;
+    grid-column-gap: 10px;
 }
 
 .score-panel .stars {
-    margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
@@ -127,9 +137,23 @@ h1 {
 }
 
 .score-panel .restart {
-    float: right;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    background: #FF4A45;
+}
+
+.score-panel .restart i {
     cursor: pointer;
 }
+
+.score__container {
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  background: #4399FF;
+}
+
 
 /* Modal styles */
 /* The Modal (background) */
@@ -186,10 +210,10 @@ h1 {
   display: inline-block;
   margin: 20px 20px;
   padding: 10px 20px;
-  background: linear-gradient(to right, #02CCBA, #aa7ecd, #aa7ecd);
+  background-color: #4399FF;
   color: white;
   font-size: 17px;
-  font-family: 'Montserrat', 'Helvetica-Neue', Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   border: none;
   clear: both;
   border-radius: 4px;
@@ -197,7 +221,7 @@ h1 {
 }
 
 .btn:hover {
-  background: linear-gradient(to right, violet, navy);
+  background-color: #FF4A45;
 }
 
 .btn--center {

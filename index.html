@@ -5,7 +5,7 @@
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> 
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -16,13 +16,21 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+          <div class="score__container">
+          	<ul class="stars">
+          		<li><i class="fa fa-star"></i></li>
+          		<li><i class="fa fa-star"></i></li>
+          		<li><i class="fa fa-star"></i></li>
+          	</ul>
+          </div>
 
-        	<span class="moves">0</span> Moves
+          <div class="score__container">
+        	  <span class="moves">0</span> Moves
+          </div>
+
+          <div class="score__container">
+            <span class="timer">0</span> s
+          </div>
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -95,7 +103,7 @@
   <div class="modal__text">
     <img src="img/trophy.png" class="trophy" alt="You've won the game!">
     <h1>Congratulations!</h1>
-    <p>You've completed the memory game in <span class="moves"></span> moves.</p>
+    <p>You've completed the memory game in <span class="moves"></span> moves and <span class="time"></span> seconds.</p>
     <p class="bold">Your score is: <ul id="score"></ul></p>
     <p>Would you like to play again?</p>
   </div>

@@ -24,7 +24,7 @@ You will need to pair the cards that are equal by revealing two cards at the tim
 
 Every time you reveal 2 cards, 1 move is counted. Your current number of moves is displayed above the game board at all times.
 
-Together with the number of moves your performance is graded with stars. You start with 3 stars, if you resolve the game in under 15 moves, you will be awarded 3 stars, if you resolve the game between 15 and 30 moves you will be awarded 2 stars and if you take more than 30 moves to resolve the game you will be awarded 1 star.
+Together with the number of moves your performance is graded with stars. You start with 3 stars, if you resolve the game in under 15 moves, you will be awarded 3 stars, if you resolve the game between 15 and 30 moves you will be awarded 2 stars and if you take more than 25 moves to resolve the game you will be awarded 1 star.
 
 ## <a name="tools"></a>What have used to build this
 
