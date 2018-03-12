@@ -49,6 +49,18 @@ const cardsPawPatrol = [
     });
   });
 
+  // function to remove the stars from the score
+  function starCount() {
+    console.log('moveCounter = ' + moveCounter);
+    if (moveCounter === 15) { // when the move counter reaches 15 remove the star
+      document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
+      console.log('drop one star');
+    } else if (moveCounter === 30) { // when the move counter reaches 15 remove the star
+      document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
+      console.log('drop second star');
+    }
+  }
+
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -88,8 +100,9 @@ const cardsPawPatrol = [
       setTimeout(function(){
         e.target.className += " show";
       }, 500);
+
       const cardId = e.target.getAttribute('data-card');
-      console.log(cardId);
+
       if (cardId != null && cardId != undefined) {
         checkCards.push(cardId);
         console.log(checkCards);
@@ -106,6 +119,7 @@ const cardsPawPatrol = [
           } else if (counter === 2 && !e.target.getAttribute('.show') && e.target != deck) {
             cardTwo = e.target;
             counter = 1;
+            starCount();
          }
       }
       assignValues();
@@ -122,6 +136,7 @@ const cardsPawPatrol = [
         if ( (checkCards.length % 2) === 0 && matchOne === matchTwo && e.target != deck ) {
           cardOne.className += " match";
           cardTwo.className += " match";
+
           moveCounter++;
           console.log('The cards match');
 
@@ -135,8 +150,8 @@ const cardsPawPatrol = [
           setTimeout(function() {
             cardOne.classList.remove('open');
             cardTwo.classList.remove('open');
-          }, 300);
-        }, 800);
+          }, 500);
+        }, 700);
         moveCounter++;
         }
       } // end of match cards
@@ -152,9 +167,16 @@ const cardsPawPatrol = [
   }
 
   function restartGame() {
+    const stars = document.querySelectorAll('.fa');
+    const cards = document.querySelectorAll('.card');
+    const clearCards = document.querySelectorAll('.show');
+
     console.log('restart clicked');
     moveCounter = 1;
-    const clearCards = document.querySelectorAll('.show');
+    movesElem[0].innerHTML = moveCounter;
+    stars.forEach(function(e) {
+      e.classList += ' fa-star';
+    });
     clearCards.forEach(function(e) {
       e.classList.remove('open', 'show', 'match');
     });
@@ -169,27 +191,34 @@ const cardsPawPatrol = [
   // when all is loaded run startGame
   document.addEventListener('DOMContentLoaded', startGame());
 
-function showModal() {
-  if (checkCards.length === cards.length) {
-    modal.style.display = "block";
-  }
-}
 
+  // MODAL
   // Modal Code from w3schools
   const modal = document.getElementById('myModal');
   const btn = document.getElementById("myBtn");
-  const span = document.getElementsByClassName("close")[0];
-  const closeBtn = document.getElementsByClassName("close")[1];
+  const span = document.querySelectorAll(".close")[0];
+  const closeBtn = document.querySelectorAll(".close")[1];
+  const restartBtn = document.querySelectorAll('.restart')[1];
 
-  // When the user clicks on the button, open the modal
-  btn.onclick = function() {
+  // when all the cards are matched show the congratulations modal
+  function showModal() {
+    if (checkCards.length === cards.length) {
       modal.style.display = "block";
+    }
   }
+
+  // When the user chooses to play again, close the modal and restart the Game
+  restartBtn.addEventListener('click' , function() {
+    console.log('clicked to restart.')
+    modal.style.display = "none";
+    restartGame();
+  });
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
       modal.style.display = "none";
   }
+  // When the user clicks on the no button, close the modal
   closeBtn.onclick = function() {
       modal.style.display = "none";
   }
