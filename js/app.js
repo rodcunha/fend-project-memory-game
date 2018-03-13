@@ -113,11 +113,11 @@ const cardsPawPatrol = [
     deck.addEventListener('click',  function(e) {  //when the deck element is clicked
       e.stopImmediatePropagation();
       e.preventDefault();
+      
+      // conditional to check if the function is already running, if so do not execute it again.
       if (timerRunning === false) {
         stopTimer = setInterval(startTimer, 1000);
-        timerRunning = true; //timer
-      } else {
-        timerRunning = true;
+        timerRunning = true; //timer is running
       }
 
       e.target.className += " open";
