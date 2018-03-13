@@ -51,10 +51,12 @@ const cardsPawPatrol = [
   });
 
   //function to start the start the timer
+  let timerRunning = false;
   let timer = document.querySelector('.timer');
   function startTimer() {
     seconds += 1;
     timer.innerText = seconds;
+    clearInterval(startTimer);
   }
 
   // function to remove the stars from the score
@@ -108,10 +110,16 @@ const cardsPawPatrol = [
 
   // reveal the cards and push them to the array to check
   function showCard() {
-    stopTimer = setInterval(startTimer, 1000);
     deck.addEventListener('click',  function(e) {  //when the deck element is clicked
       e.stopImmediatePropagation();
       e.preventDefault();
+      if (timerRunning === false) {
+        stopTimer = setInterval(startTimer, 1000);
+        timerRunning = true; //timer
+      } else {
+        timerRunning = true;
+      }
+
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
