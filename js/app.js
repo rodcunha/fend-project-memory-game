@@ -113,22 +113,36 @@ const cardsPawPatrol = [
     deck.addEventListener('click',  function(e) {  //when the deck element is clicked
       e.stopImmediatePropagation();
       e.preventDefault();
-      
       // conditional to check if the function is already running, if so do not execute it again.
       if (timerRunning === false) {
         stopTimer = setInterval(startTimer, 1000);
         timerRunning = true; //timer is running
       }
-
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
       }, 300);
+
+      const isTurned = e.target.getAttribute('data-clicked');
+      console.log(isTurned);
       const cardId = e.target.getAttribute('data-card');
-      if (cardId != null && cardId != undefined) {
+      if (isTurned === 'yes') {
+        console.log('this card has already been turned.');
+      } else if (cardId != null && cardId != undefined) {
         checkCards.push(cardId);
-      //  console.log(checkCards);
+        console.log(checkCards);
       }
+      e.target.setAttribute('data-clicked', 'yes'); // set an attribute to see if the card has been turned
+      //
+      // const cardsOpen = e.target.classList;
+      // cardsOpen.forEach(function(i) {
+      //   if (e.target.classList[] === 'opened' ) {
+      //     console.log('print this');
+      //   }
+      // });
+
+
+
 
       // function  to assign the values to the cards
       //console.log('counter: ' + counter);
