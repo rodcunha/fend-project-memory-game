@@ -113,7 +113,7 @@ const cardsPawPatrol = [
     const cardId = e.target.getAttribute('data-card');
 
     console.log('classlist: ' + e.target.classList);
-    if ( e.target.nodeName === 'LI' && !isTurned) {
+    if ( e.target.nodeName === 'LI' && !isTurned && counter >= 1) {
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
@@ -133,6 +133,8 @@ const cardsPawPatrol = [
     cardTwo.className = 'card';
     cardOne.className = 'card';
   }
+
+
 
   // function hideCards() {
   //   cardOne.classList.remove('show');
@@ -159,7 +161,6 @@ const cardsPawPatrol = [
       const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
       const matchTwo = checkCards[checkCards.length-1]; // last card on the array
       const openCards = document.getElementsByClassName('open show'); // select elements with both classes open and show
-
     console.log('cardOne: ' + cardOne + " --- cardTwo: " + cardTwo );
     //check if the array is pair and if the cards match and if the target isn't deck
     if ( matchOne === matchTwo && e.target != deck ) {
@@ -226,6 +227,7 @@ const cardsPawPatrol = [
 
 
   deck.addEventListener('click',  function(e) {  //when the deck element is clicked
+      console.log('TARGET: ' + e.target);
       e.stopImmediatePropagation();
       e.preventDefault();
       // conditional to check if the function is already running, if so do not execute it again.
