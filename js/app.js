@@ -108,130 +108,77 @@ const cardsPawPatrol = [
     }
   }
 
-  // reveal the cards and push them to the array to check
-  function showCard() {
-    deck.addEventListener('click',  function(e) {  //when the deck element is clicked
-      e.stopImmediatePropagation();
-      e.preventDefault();
-      // conditional to check if the function is already running, if so do not execute it again.
-      if (timerRunning === false) {
-        stopTimer = setInterval(startTimer, 1000);
-        timerRunning = true; //timer is running
-      }
+  function showCards(e) {
+    const isTurned = e.target.getAttribute('data-clicked');
+    const cardId = e.target.getAttribute('data-card');
+
+    console.log('classlist: ' + e.target.classList);
+    if ( e.target.nodeName === 'LI' && !isTurned) {
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
-      }, 300);
+      }, 250);
+    }
 
-      const isTurned = e.target.getAttribute('data-clicked');
-      console.log(isTurned);
-      const cardId = e.target.getAttribute('data-card');
-      if (isTurned === 'yes') {
-        console.log('this card has already been turned.');
-      } else if (cardId != null && cardId != undefined) {
-        checkCards.push(cardId);
-        console.log(checkCards);
-      }
-      e.target.setAttribute('data-clicked', 'yes'); // set an attribute to see if the card has been turned
-      //
-      // const cardsOpen = e.target.classList;
-      // cardsOpen.forEach(function(i) {
-      //   if (e.target.classList[] === 'opened' ) {
-      //     console.log('print this');
-      //   }
-      // });
-
-
-
-
-      // function  to assign the values to the cards
-      //console.log('counter: ' + counter);
-      function assignValues() {
-          if (counter === 1 && !e.target.getAttribute('.show') && e.target != deck) {
-            cardOne = e.target;
-            counter++;
-          } else if (counter === 2 && !e.target.getAttribute('.show') && e.target != deck) {
-            cardTwo = e.target;
-            counter = 1;
-            starCount();
-         }
-      }
-      assignValues();
-
-      // function to match the cards
-      function matchCards() {
-        const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
-        const matchTwo = checkCards[checkCards.length-1]; // last card on the array
-        const openCards = document.getElementsByClassName('open show'); // select elements with both classes open and show
-
-        console.log('cardOne: ' + cardOne + " --- cardTwo: " + cardTwo );
-        //check if the array is pair and if the cards match and if the target isn't deck
-        if ( (checkCards.length % 2) === 0 && matchOne === matchTwo && e.target != deck ) {
-          cardOne.className += " match"; //add class match to both variables
-          cardTwo.className += " match";
-          moveCounter++; //increment the counters
-          console.log('The cards match');
-        // check if the the array length is pair and if the cards don't match and the target wasn't the deck element
-        } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
-          console.log(matchOne + "-" + matchTwo + 'They are not a match');
-          checkCards.splice(-2, 2); //remove the 2 cards from the array
-          setTimeout(function() {
-            cardOne.classList.remove('show'); // hides the image from the first matched card after 0.2s
-          }, 200);
-          setTimeout(function() {
-            //console.log('cardOne: ' + cardOne + '=' + 'cardTwo' + cardTwo);
-            cardTwo.classList.remove('show'); // hides the image on the second card
-          setTimeout(function() {
-            cardTwo.classList.remove('open'); //folds the cards back
-          }, 500);
-          cardOne.classList.remove('open'); //folds the cards back
-        }, 600);
-        moveCounter++; //increments the counter
-        }
-      } // end of match cards
-      matchCards();
-      showModal();
-    });
+    if (isTurned === 'yes') {
+      return true;
+    } else if (cardId != null && cardId != undefined) {
+      checkCards.push(cardId);
+      console.log(checkCards);
+    }
+    e.target.setAttribute('data-clicked', 'yes'); // set an attribute to see if the card has been turned
   }
 
-  // startGame function
-  function startGame() {
-    shuffleCards();
-    assignImg();
-    showCard();
+  function foldCards() {
+    cardTwo.className = 'card';
+    cardOne.className = 'card';
   }
 
-  //function to restart the game
-  function restartGame() {
-    const stars = document.querySelectorAll('.fa'); // select all elements with the .fa class
-    const cards = document.querySelectorAll('.card'); // select all elements with the .card class
-    const clearCards = document.querySelectorAll('.show'); // select all the cards shown
+  // function hideCards() {
+  //   cardOne.classList.remove('show');
+  //   cardTwo.classList.remove('show');
+  //
+  // }
 
-    console.log('restart clicked');
-    moveCounter = 1;
-    movesElem[0].innerHTML = moveCounter;
-    stars.forEach(function(e) {
-      e.classList += ' fa-star';
-    });
-    clearCards.forEach(function(e) {
-        e.classList.remove('open', 'show', 'match');
-    });
-    checkCards = []; //reset the array used to check the values to an empty array
-    setTimeout(function() { //delay for the reshuffle not to be visible
-      startGame();
-    }, 1200);
+  // function  to assign the values to the cards
+  //console.log('counter: ' + counter);
+  function assignValues(e) {
+      if (counter === 1 && !e.target.getAttribute('.show') && e.target != deck) {
+        cardOne = e.target;
+        counter++;
+      } else if (counter === 2 && !e.target.getAttribute('.show') && e.target != deck) {
+        cardTwo = e.target;
+        counter = 1;
+        starCount();
+     }
   }
 
-  //function to run when the game is rerstarted.
-  restart.addEventListener('click', function() {
-    restartGame();
-    seconds = 0; // reset seconds
-    stopTimer = setInterval(startTimer, 1000);
-  });
+  // function to match the cards
+  function matchCards(e) {
+    if ( (checkCards.length %2) === 0 ) {
+      const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
+      const matchTwo = checkCards[checkCards.length-1]; // last card on the array
+      const openCards = document.getElementsByClassName('open show'); // select elements with both classes open and show
 
-  // when all is loaded run startGame
-  document.addEventListener('DOMContentLoaded', startGame());
+    console.log('cardOne: ' + cardOne + " --- cardTwo: " + cardTwo );
+    //check if the array is pair and if the cards match and if the target isn't deck
+    if ( matchOne === matchTwo && e.target != deck ) {
+      cardOne.className += " match"; //add class match to both variables
+      cardTwo.className += " match";
+      moveCounter++; //increment the counters
+      console.log('The cards match');
+    // check if the the array length is pair and if the cards don't match and the target wasn't the deck element
+    } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
+      console.log(cardOne + "-" + cardTwo + 'They are not a match');
+      checkCards.splice(-2, 2); //remove the 2 cards from the array
+      cardOne.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
+      cardTwo.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
 
+      setTimeout(foldCards, 400); //fold the cards
+      moveCounter++; //increments the counter
+    }
+  } // end of main conditional
+  } // end of match cards
 
   // MODAL
   // Modal Code from w3schools
@@ -276,3 +223,58 @@ const cardsPawPatrol = [
           modal.style.display = "none";
       }
   }
+
+
+  deck.addEventListener('click',  function(e) {  //when the deck element is clicked
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      // conditional to check if the function is already running, if so do not execute it again.
+      if (timerRunning === false) {
+        stopTimer = setInterval(startTimer, 1000);
+        timerRunning = true; //timer is running
+      }
+      showCards(e);
+      assignValues(e);
+      matchCards(e);
+      showModal();
+  });
+
+
+  // startGame function
+  function startGame() {
+    shuffleCards();
+    assignImg();
+  }
+
+  //function to restart the game
+  function restartGame() {
+    const stars = document.querySelectorAll('.fa'); // select all elements with the .fa class
+    const cards = document.querySelectorAll('.card'); // select all elements with the .card class
+    const clearCards = document.querySelectorAll('.show'); // select all the cards shown
+
+    console.log('restart clicked');
+    moveCounter = 1;
+    movesElem[0].innerHTML = moveCounter;
+    stars.forEach(function(e) {
+      e.classList += ' fa-star';
+    });
+    clearCards.forEach(function(e) {
+        e.classList.remove('open', 'show', 'match');
+        e.removeAttribute('data-clicked');
+    });
+    checkCards = []; //reset the array used to check the values to an empty array
+    setTimeout(function() { //delay for the reshuffle not to be visible
+      startGame();
+    }, 600);
+  }
+
+  //function to run when the game is rerstarted.
+  restart.addEventListener('click', function(e) {
+    restartGame(e);
+    seconds = 0; // reset seconds
+    clearInterval(stopTimer);
+    stopTimer = setInterval(startTimer, 1000);
+  });
+
+  // when all is loaded run startGame
+  document.addEventListener('DOMContentLoaded', startGame());

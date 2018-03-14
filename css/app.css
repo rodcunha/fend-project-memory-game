@@ -80,8 +80,8 @@ h1 {
 }
 
 .deck .card img {
-  transition-delay: 0.8s;
-  transition: 1s;
+  transition-delay: 0.1s;
+  transition: 0.3s;
   visibility: hidden;
 }
 
