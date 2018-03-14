@@ -38,6 +38,13 @@ const cardsPawPatrol = [
   const tiles = document.querySelectorAll('.card'); // selects all the list items and adds them to the tiles variable
   const movesElem = document.querySelectorAll('.moves'); // selects the moves class span in the HTML
   const restart = document.querySelector('.fa-repeat'); // selects the restart icon
+  // Modal variables for showModal()
+  const modal = document.getElementById('myModal'); //myModal Element
+  const btn = document.getElementById("myBtn"); //myBtn
+  const closeBtn = document.querySelectorAll(".close")[1]; //second span with the class close
+  const time = document.querySelector(".time"); // element with the class of time
+  const restartBtn = document.querySelectorAll('.restart')[1]; // second element with the class .restart
+  const span = document.querySelectorAll(".close")[0]; //first span with the class close
   //const selectDeck = document.querySelectorAll('.chooseDeck'); //selects all the buttons with chooseDeck class
   let cards, cardsTop, cardsBottom, stopTimer;
   let cardOne, cardTwo;
@@ -112,16 +119,15 @@ const cardsPawPatrol = [
     const isTurned = e.target.getAttribute('data-clicked');
     const cardId = e.target.getAttribute('data-card');
 
-    console.log('classlist: ' + e.target.classList);
-    if ( e.target.nodeName === 'LI' && !isTurned && counter >= 1) {
+    if ( e.target.nodeName === 'LI' && !isTurned ) {
       e.target.className += " open";
       setTimeout(function(){
         e.target.className += " show";
       }, 250);
     }
 
-    if (isTurned === 'yes') {
-      return true;
+    if (isTurned === 'yes' || e.target.nodeName === 'IMG') {
+      console.log('this is an image.')
     } else if (cardId != null && cardId != undefined) {
       checkCards.push(cardId);
       console.log(checkCards);
@@ -133,14 +139,6 @@ const cardsPawPatrol = [
     cardTwo.className = 'card';
     cardOne.className = 'card';
   }
-
-
-
-  // function hideCards() {
-  //   cardOne.classList.remove('show');
-  //   cardTwo.classList.remove('show');
-  //
-  // }
 
   // function  to assign the values to the cards
   //console.log('counter: ' + counter);
@@ -155,8 +153,8 @@ const cardsPawPatrol = [
      }
   }
 
-  // function to match the cards
-  function matchCards(e) {
+// function to match the cards
+function matchCards(e) {
     if ( (checkCards.length %2) === 0 ) {
       const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
       const matchTwo = checkCards[checkCards.length-1]; // last card on the array
@@ -179,17 +177,9 @@ const cardsPawPatrol = [
       moveCounter++; //increments the counter
     }
   } // end of main conditional
-  } // end of match cards
+} // end of match cards
 
-  // MODAL
   // Modal Code from w3schools
-  const modal = document.getElementById('myModal'); //myModal Element
-  const btn = document.getElementById("myBtn"); //myBtn
-  const span = document.querySelectorAll(".close")[0]; //first span with the class close
-  const closeBtn = document.querySelectorAll(".close")[1]; //second span with the class close
-  const restartBtn = document.querySelectorAll('.restart')[1]; // second element with the class .restart
-  const time = document.querySelector(".time"); // element with the class of time
-
   // when all the cards are matched show the congratulations modal
   function showModal() {
     if (checkCards.length === cards.length) {
@@ -274,8 +264,9 @@ const cardsPawPatrol = [
   restart.addEventListener('click', function(e) {
     restartGame(e);
     seconds = 0; // reset seconds
+    setTimeout(() => {timer.innerText = seconds;}, 200);
     clearInterval(stopTimer);
-    stopTimer = setInterval(startTimer, 1000);
+    timerRunning = false;
   });
 
   // when all is loaded run startGame
