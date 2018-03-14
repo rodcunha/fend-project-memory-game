@@ -60,14 +60,15 @@ const cardsPawPatrol = [
   //function to start the start the timer
   let timerRunning = false;
   let timer = document.querySelector('.timer');
-  function startTimer() {
+
+  var startTimer = () => {
     seconds += 1;
     timer.innerText = seconds;
     clearInterval(startTimer);
   }
 
   // function to remove the stars from the score
-  function starCount() {
+  var starCount = () => {
     //console.log('moveCounter = ' + moveCounter);
     if (moveCounter === 15) { // when the move counter reaches 15 remove the star
       document.querySelector('.fa-star:last-of-type').classList.remove('fa-star');
@@ -78,7 +79,7 @@ const cardsPawPatrol = [
   }
 
   // function to set the score of stars
-  function score() {
+  var score = () => {
     let scoreElem = document.querySelector('#score'); // selects the element with the id of score
     const starList = document.querySelector('.stars'); //selects the element with the class of stars
     scoreElem.innerHTML = starList.innerHTML;
@@ -100,7 +101,7 @@ const cardsPawPatrol = [
   }
 
   //shuffling of the cards
-  function shuffleCards() {
+  var shuffleCards = () => {
     cardsTop = cardsPawPatrol.slice(0); //shuffle the first iteration of the cards
     cardsBottom = cardsPawPatrol.slice(0); //shuffle the second iteration of the cards
     cards = cardsTop.concat(cardsBottom); // join the two arrays
@@ -108,16 +109,16 @@ const cardsPawPatrol = [
   };
 
   //function to assign the images
-  function assignImg() {
+  var assignImg = () => {
     for (i = 0 ; i < cards.length; i++) { //loop through all the cards
       tiles[i].children.item(0).setAttribute('src', cards[i].img); //select the child item and set the source randomly
       tiles[i].setAttribute('data-card', cards[i].card); //set the data-card attribute which we will after add to the new array
     }
   }
 
-  function showCards(e) {
-    const isTurned = e.target.getAttribute('data-clicked');
-    const cardId = e.target.getAttribute('data-card');
+  var showCards = (e) => {
+    const isTurned = e.target.getAttribute('data-clicked');  //is the card already turned
+    const cardId = e.target.getAttribute('data-card');  // assign the id to a variable
 
     if ( e.target.nodeName === 'LI' && !isTurned ) {
       e.target.className += " open";
@@ -135,18 +136,18 @@ const cardsPawPatrol = [
     e.target.setAttribute('data-clicked', 'yes'); // set an attribute to see if the card has been turned
   }
 
-  function foldCards() {
+  var foldCards = () => {
     cardTwo.className = 'card';
     cardOne.className = 'card';
   }
 
   // function  to assign the values to the cards
   //console.log('counter: ' + counter);
-  function assignValues(e) {
-      if (counter === 1 && !e.target.getAttribute('.show') && e.target != deck) {
+  var assignValues = (e) => {
+      if (counter === 1 && !e.target.getAttribute('.show') && e.target != deck && e.target.nodeName === 'LI') {
         cardOne = e.target;
         counter++;
-      } else if (counter === 2 && !e.target.getAttribute('.show') && e.target != deck) {
+      } else if (counter === 2 && !e.target.getAttribute('.show') && e.target != deck && e.target.nodeName === 'LI') {
         cardTwo = e.target;
         counter = 1;
         starCount();
@@ -154,7 +155,7 @@ const cardsPawPatrol = [
   }
 
 // function to match the cards
-function matchCards(e) {
+var matchCards = (e) => {
     if ( (checkCards.length %2) === 0 ) {
       const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
       const matchTwo = checkCards[checkCards.length-1]; // last card on the array
@@ -181,50 +182,55 @@ function matchCards(e) {
 
   // Modal Code from w3schools
   // when all the cards are matched show the congratulations modal
-  function showModal() {
+  var showModal = () => {
     if (checkCards.length === cards.length) {
       score(); //execute the score function
       clearInterval(stopTimer); //stop the timer
       modal.style.display = "block";  // show the modal (from hidden)
       time.innerText = seconds; // display the seconds elapsed on the modal
       //set the timer back to 0
-      timer = 0;
+      timer.innerText = 0;
     }
   }
 
   // When the user chooses to play again, close the modal and restart the Game
-  restartBtn.addEventListener('click' , function() {
-    console.log('Restart Clicked!')
+  restartBtn.addEventListener('click' , function(e) {
     modal.style.display = "none";
-    restartGame();
+    restartGame(e);
   });
 
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
+  span.onclick = () => {
       modal.style.display = "none";
   }
   // When the user clicks on the no button, close the modal
-  closeBtn.onclick = function() {
+  closeBtn.onclick = () => {
       modal.style.display = "none";
   }
 
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+  window.onclick = (event) => {
       if (event.target == modal) {
           modal.style.display = "none";
       }
   }
 
+  // conditional to check if the function is already running, if so do not execute it again.
+  var checkTimer = () => {
+    if (timerRunning === false) {
+      stopTimer = setInterval(startTimer, 1000);
+      timerRunning = true; //timer is running
+    }
+  }
+
 
   deck.addEventListener('click',  function(e) {  //when the deck element is clicked
-      console.log('TARGET: ' + e.target);
+      console.log('timerRunning = ' + timerRunning)
       e.stopImmediatePropagation();
       e.preventDefault();
-      // conditional to check if the function is already running, if so do not execute it again.
-      if (timerRunning === false) {
-        stopTimer = setInterval(startTimer, 1000);
-        timerRunning = true; //timer is running
-      }
+
+      console.log('timerRunning coditional: ' + timerRunning);
+      checkTimer();
       showCards(e);
       assignValues(e);
       matchCards(e);
@@ -233,18 +239,19 @@ function matchCards(e) {
 
 
   // startGame function
-  function startGame() {
+  var startGame = () => {
     shuffleCards();
     assignImg();
   }
 
   //function to restart the game
-  function restartGame() {
+  var restartGame = () => {
     const stars = document.querySelectorAll('.fa'); // select all elements with the .fa class
     const cards = document.querySelectorAll('.card'); // select all elements with the .card class
     const clearCards = document.querySelectorAll('.show'); // select all the cards shown
 
-    console.log('restart clicked');
+    resetTimer();
+
     moveCounter = 1;
     movesElem[0].innerHTML = moveCounter;
     stars.forEach(function(e) {
@@ -257,17 +264,21 @@ function matchCards(e) {
     checkCards = []; //reset the array used to check the values to an empty array
     setTimeout(function() { //delay for the reshuffle not to be visible
       startGame();
-    }, 600);
+    }, 500);
   }
 
   //function to run when the game is rerstarted.
   restart.addEventListener('click', function(e) {
     restartGame(e);
-    seconds = 0; // reset seconds
-    setTimeout(() => {timer.innerText = seconds;}, 200);
-    clearInterval(stopTimer);
-    timerRunning = false;
   });
+
+  // function to reset the timer counting
+  var resetTimer = () => {
+    clearInterval(stopTimer);
+    seconds = 0; // reset seconds
+    setTimeout(() => {timer.innerText = seconds;}, 150);
+    timerRunning = false;
+  }
 
   // when all is loaded run startGame
   document.addEventListener('DOMContentLoaded', startGame());

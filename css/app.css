@@ -230,6 +230,8 @@ h1 {
 }
 
 .trophy {
+  display: block;
+  clear: both;
   width: 150px;
   margin: 0 auto;
 }
@@ -242,6 +244,8 @@ h1 {
   display: inline;
   list-style-type: none;
   color: gold;
+  padding: 0;
+  margin: 0 auto;
 }
 
 #score li {
