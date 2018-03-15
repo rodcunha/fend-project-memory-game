@@ -119,15 +119,18 @@ const cardsPawPatrol = [
   var showCards = (e) => {
     const isTurned = e.target.getAttribute('data-clicked');  //is the card already turned
     const cardId = e.target.getAttribute('data-card');  // assign the id to a variable
+    const tagName = e.target.nodeName;
 
-    if ( e.target.nodeName === 'LI' && !isTurned ) {
-      e.target.className += " open";
-      setTimeout(function(){
-        e.target.className += " show";
-      }, 250);
+    if ( tagName === 'LI' && !isTurned ) {
+      (function(tagName) {
+        e.target.className += " open";
+        setTimeout(function(){
+          e.target.className += " show";
+        }, 250);
+      })(tagName);
     }
 
-    if (isTurned === 'yes' || e.target.nodeName === 'IMG') {
+    if (isTurned === 'yes' || tagName === 'IMG') {
       console.log('this is an image.')
     } else if (cardId != null && cardId != undefined) {
       checkCards.push(cardId);
@@ -137,8 +140,13 @@ const cardsPawPatrol = [
   }
 
   var foldCards = () => {
-    cardTwo.className = 'card';
-    cardOne.className = 'card';
+      setTimeout( () =>  {
+        cardTwo.className = 'card';
+        cardOne.className = 'card';
+      }, 400);
+      setTimeout( () => {
+        deck.style.pointerEvents = 'auto';
+      }, 410);
   }
 
   // function  to assign the values to the cards
@@ -161,6 +169,7 @@ var matchCards = (e) => {
       const matchTwo = checkCards[checkCards.length-1]; // last card on the array
       const openCards = document.getElementsByClassName('open show'); // select elements with both classes open and show
     console.log('cardOne: ' + cardOne + " --- cardTwo: " + cardTwo );
+
     //check if the array is pair and if the cards match and if the target isn't deck
     if ( matchOne === matchTwo && e.target != deck ) {
       cardOne.className += " match"; //add class match to both variables
@@ -168,14 +177,14 @@ var matchCards = (e) => {
       moveCounter++; //increment the counters
       console.log('The cards match');
     // check if the the array length is pair and if the cards don't match and the target wasn't the deck element
-    } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
-      console.log(cardOne + "-" + cardTwo + 'They are not a match');
-      checkCards.splice(-2, 2); //remove the 2 cards from the array
-      cardOne.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
-      cardTwo.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
-
-      setTimeout(foldCards, 400); //fold the cards
-      moveCounter++; //increments the counter
+  } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
+          console.log(cardOne + "-" + cardTwo + 'They are not a match');
+          deck.style.pointerEvents = 'none';
+          checkCards.splice(-2, 2); //remove the 2 cards from the array
+          cardOne.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
+          cardTwo.removeAttribute('data-clicked'); //removes the clicked flag when the cards don't match
+          foldCards(); //fold the cards
+          moveCounter++; //increments the counter
     }
   } // end of main conditional
 } // end of match cards
