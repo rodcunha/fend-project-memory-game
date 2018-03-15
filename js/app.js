@@ -51,14 +51,14 @@ const cardsPawPatrol = [
 
 
   //function to count the moves.
-  var moves = deck.addEventListener('click', function() {
-    movesElem.forEach(function(e) {
+  var moves = deck.addEventListener('click', () => {
+    movesElem.forEach( e => {
       e.innerHTML = moveCounter;
     });
   });
 
   //function to start the start the timer
-  let timerRunning = false;
+  let isTimerRunning = false;
   let timer = document.querySelector('.timer');
 
   var startTimer = () => {
@@ -116,18 +116,16 @@ const cardsPawPatrol = [
     }
   }
 
-  var showCards = (e) => {
+  var showCards = e => {
     const isTurned = e.target.getAttribute('data-clicked');  //is the card already turned
     const cardId = e.target.getAttribute('data-card');  // assign the id to a variable
     const tagName = e.target.nodeName;
 
     if ( tagName === 'LI' && !isTurned ) {
-      (function(tagName) {
         e.target.className += " open";
-        setTimeout(function(){
+        setTimeout(() => {
           e.target.className += " show";
         }, 250);
-      })(tagName);
     }
 
     if (isTurned === 'yes' || tagName === 'IMG') {
@@ -151,7 +149,7 @@ const cardsPawPatrol = [
 
   // function  to assign the values to the cards
   //console.log('counter: ' + counter);
-  var assignValues = (e) => {
+  var assignValues = e => {
       if (counter === 1 && !e.target.getAttribute('.show') && e.target != deck && e.target.nodeName === 'LI') {
         cardOne = e.target;
         counter++;
@@ -163,21 +161,20 @@ const cardsPawPatrol = [
   }
 
 // function to match the cards
-var matchCards = (e) => {
+var matchCards = e => {
     if ( (checkCards.length %2) === 0 ) {
       const matchOne = checkCards[checkCards.length - 2]; // second to last card on the array
       const matchTwo = checkCards[checkCards.length-1]; // last card on the array
       const openCards = document.getElementsByClassName('open show'); // select elements with both classes open and show
-    console.log('cardOne: ' + cardOne + " --- cardTwo: " + cardTwo );
 
     //check if the array is pair and if the cards match and if the target isn't deck
     if ( matchOne === matchTwo && e.target != deck ) {
-      cardOne.className += " match"; //add class match to both variables
-      cardTwo.className += " match";
-      moveCounter++; //increment the counters
-      console.log('The cards match');
-    // check if the the array length is pair and if the cards don't match and the target wasn't the deck element
-  } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
+        cardOne.className += " match"; //add class match to both variables
+        cardTwo.className += " match";
+        moveCounter++; //increment the counters
+        console.log('The cards match');
+  // check if the the array length is pair and if the cards don't match and the target wasn't the deck element
+    } else if ( checkCards.length % 2 === 0 && matchOne != matchTwo && e.target != deck ) {
           console.log(cardOne + "-" + cardTwo + 'They are not a match');
           deck.style.pointerEvents = 'none';
           checkCards.splice(-2, 2); //remove the 2 cards from the array
@@ -203,7 +200,7 @@ var matchCards = (e) => {
   }
 
   // When the user chooses to play again, close the modal and restart the Game
-  restartBtn.addEventListener('click' , function(e) {
+  restartBtn.addEventListener('click' , e => {
     modal.style.display = "none";
     restartGame(e);
   });
@@ -218,7 +215,7 @@ var matchCards = (e) => {
   }
 
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = (event) => {
+  window.onclick = event => {
       if (event.target == modal) {
           modal.style.display = "none";
       }
@@ -226,26 +223,22 @@ var matchCards = (e) => {
 
   // conditional to check if the function is already running, if so do not execute it again.
   var checkTimer = () => {
-    if (timerRunning === false) {
+    if (isTimerRunning === false) {
       stopTimer = setInterval(startTimer, 1000);
-      timerRunning = true; //timer is running
+      isTimerRunning = true; //timer is running
     }
   }
 
 
-  deck.addEventListener('click',  function(e) {  //when the deck element is clicked
-      console.log('timerRunning = ' + timerRunning)
+  deck.addEventListener('click', e => {  //when the deck element is clicked
       e.stopImmediatePropagation();
       e.preventDefault();
-
-      console.log('timerRunning coditional: ' + timerRunning);
       checkTimer();
       showCards(e);
       assignValues(e);
       matchCards(e);
       showModal();
   });
-
 
   // startGame function
   var startGame = () => {
@@ -260,24 +253,23 @@ var matchCards = (e) => {
     const clearCards = document.querySelectorAll('.show'); // select all the cards shown
 
     resetTimer();
-
     moveCounter = 1;
     movesElem[0].innerHTML = moveCounter;
-    stars.forEach(function(e) {
+    stars.forEach((e) => {
       e.classList += ' fa-star';
     });
-    clearCards.forEach(function(e) {
+    clearCards.forEach( e => {
         e.classList.remove('open', 'show', 'match');
         e.removeAttribute('data-clicked');
     });
     checkCards = []; //reset the array used to check the values to an empty array
-    setTimeout(function() { //delay for the reshuffle not to be visible
+    setTimeout(() => { //delay for the reshuffle not to be visible
       startGame();
     }, 500);
   }
 
   //function to run when the game is rerstarted.
-  restart.addEventListener('click', function(e) {
+  restart.addEventListener('click', e => {
     restartGame(e);
   });
 
@@ -286,7 +278,7 @@ var matchCards = (e) => {
     clearInterval(stopTimer);
     seconds = 0; // reset seconds
     setTimeout(() => {timer.innerText = seconds;}, 150);
-    timerRunning = false;
+    isTimerRunning = false;
   }
 
   // when all is loaded run startGame
